@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080808">
+  <meta name="description" content="Podcasts, lives, cursos e produções audiovisuais na Pub Produções.">
+  <title>Pub Produções | Seu conteúdo merece qualidade profissional</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alice&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #080808;
+      --panel: #121212;
+      --card: #171717;
+      --white: #f8f8f6;
+      --muted: #b9b9b9;
+      --yellow: #f8b900;
+      --line: rgba(255,255,255,.14);
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--black);
+      color: var(--white);
+      font-family: "Montserrat", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 5;
+      border-bottom: 1px solid rgba(255,255,255,.13);
+      background: rgba(7,7,7,.28);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav {
+      min-height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      line-height: 1.05;
+    }
+
+    .brand-mark {
+      width: 39px;
+      height: 39px;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--yellow);
+      border-radius: 50%;
+      color: var(--yellow);
+      font-size: 18px;
+    }
+
+    .brand-wordmark {
+      display: inline-block;
+      color: #fff;
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      line-height: 1;
+    }
+
+    .brand small {
+      display: block;
+      color: #ccc;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .2em;
+      margin-top: 5px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      color: #ededed;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover { color: var(--yellow); }
+
+    .button {
+      min-height: 48px;
+      padding: 0 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      background: var(--yellow);
+      color: #111;
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      background: #ffd24a;
+    }
+
+    .button.outline {
+      border-color: rgba(255,255,255,.58);
+      background: transparent;
+      color: #fff;
+    }
+
+    .button.outline:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    .hero {
+      min-height: 730px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 140px 0 90px;
+      background: #080808;
+    }
+
+    .hero-image {
+      position: absolute;
+      inset: 0 0 0 30%;
+      width: 70%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 45%;
+      opacity: .76;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(90deg, #080808 0%, rgba(8,8,8,.94) 29%, rgba(8,8,8,.52) 58%, rgba(8,8,8,.18) 100%),
+        linear-gradient(0deg, rgba(8,8,8,.8), transparent 40%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 730px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .19em;
+      text-transform: uppercase;
+    }
+
+    .hero-brand {
+      margin: 0 0 23px;
+      color: #fff;
+      font-family: "Alice", Georgia, serif;
+      font-size: clamp(25px, 3.2vw, 39px);
+      letter-spacing: .025em;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(48px, 7.5vw, 88px);
+      font-weight: 900;
+      letter-spacing: -.075em;
+      line-height: .99;
+    }
+
+    h1 span,
+    .highlight { color: var(--yellow); }
+
+    .hero-copy {
+      max-width: 570px;
+      margin: 24px 0 29px;
+      color: #e1e1e1;
+      font-size: clamp(15px, 1.8vw, 18px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 33px;
+      color: #d1d1d1;
+      font-size: 12px;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      flex: 0 0 9px;
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 16px rgba(248,185,0,.7);
+    }
+
+    section { padding: 96px 0; }
+
+    .section-head {
+      max-width: 720px;
+      margin-bottom: 38px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 13px;
+      font-size: clamp(33px, 5vw, 54px);
+      font-weight: 900;
+      letter-spacing: -.06em;
+      line-height: 1.05;
+    }
+
+    .section-head p:last-child {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.03fr .97fr;
+      gap: 54px;
+      align-items: center;
+    }
+
+    .intro-photo {
+      min-height: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--card);
+    }
+
+    .intro-photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      object-fit: contain;
+    }
+
+    .intro-copy h2 {
+      margin: 0 0 17px;
+      font-size: clamp(34px, 4vw, 51px);
+      font-weight: 900;
+      letter-spacing: -.06em;
+      line-height: 1.06;
+    }
+
+    .intro-copy > p:not(.eyebrow) { color: var(--muted); }
+
+    .check-list {
+      display: grid;
+      gap: 12px;
+      margin: 23px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      display: flex;
+      gap: 11px;
+      color: #e9e9e9;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      color: var(--yellow);
+      font-weight: 900;
+    }
+
+    .dark-section { background: #101010; }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+
+    .service-card {
+      min-height: 268px;
+      padding: 24px 21px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(248,185,0,.65);
+    }
+
+    .service-number {
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .15em;
+    }
+
+    .service-card h3 {
+      margin: 20px 0 9px;
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .service-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .price {
+      display: block;
+      margin-top: 17px;
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .live-panel {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 35px;
+      align-items: center;
+      padding: 40px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: #171717;
+    }
+
+    .live-panel h2 {
+      margin: 0 0 14px;
+      font-size: clamp(31px, 4vw, 47px);
+      font-weight: 900;
+      letter-spacing: -.06em;
+      line-height: 1.07;
+    }
+
+    .live-panel p { color: var(--muted); }
+
+    .platforms {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 22px;
+    }
+
+    .platform {
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 999px;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .live-features { display: grid; gap: 12px; }
+
+    .live-feature {
+      padding: 15px 17px;
+      border-left: 3px solid var(--yellow);
+      background: rgba(255,255,255,.045);
+      color: #dedede;
+      font-size: 13px;
+    }
+
+    .live-feature strong {
+      display: block;
+      margin-bottom: 3px;
+      color: #fff;
+    }
+
+    .addons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .addon {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111;
+    }
+
+    .addon h3 {
+      margin: 0 0 9px;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+
+    .addon p {
+      min-height: 62px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .addon .price { margin-top: 15px; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 205px;
+      gap: 13px;
+    }
+
+    .gallery-item {
+      position: relative;
+      grid-column: span 4;
+      overflow: hidden;
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #171717;
+    }
+
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(4) { grid-column: span 6; }
+
+    .gallery-item img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .35s ease;
+    }
+
+    .gallery-item:hover img { transform: scale(1.045); }
+
+    .gallery-item figcaption {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 32px 15px 13px;
+      background: linear-gradient(transparent, rgba(0,0,0,.82));
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .client-card {
+      min-height: 126px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card);
+    }
+
+    .client-card span {
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .client-card h3 {
+      margin: 18px 0 0;
+      font-size: 17px;
+      line-height: 1.25;
+    }
+
+    .clients-note {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cta {
+      padding: 84px 24px;
+      border-top: 1px solid var(--line);
+      background: radial-gradient(ellipse at 50% 120%, rgba(248,185,0,.16), transparent 60%), #111;
+      text-align: center;
+    }
+
+    .cta h2 {
+      max-width: 760px;
+      margin: 0 auto 15px;
+      font-size: clamp(35px, 5vw, 58px);
+      font-weight: 900;
+      letter-spacing: -.06em;
+      line-height: 1.03;
+    }
+
+    .cta > .wrap > p:not(.eyebrow) {
+      max-width: 590px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 11px;
+    }
+
+    .contact-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      padding: 35px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .contact-block {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #111;
+    }
+
+    .contact-block h3 {
+      margin: 0 0 7px;
+      color: var(--yellow);
+      font-size: 13px;
+    }
+
+    .contact-block p {
+      margin: 0;
+      color: #ddd;
+      font-size: 13px;
+    }
+
+    .contact-block a { text-decoration: none; }
+
+    .contact-block a:hover { color: var(--yellow); }
+
+    footer {
+      padding: 22px 0;
+      border-top: 1px solid var(--line);
+      color: #999;
+      font-size: 11px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-inner a {
+      color: #ddd;
+      text-decoration: none;
+    }
+
+    .footer-inner a:hover { color: var(--yellow); }
+
+    @media (max-width: 900px) {
+      .service-grid,
+      .addons-grid,
+      .clients-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .intro-grid,
+      .live-panel { grid-template-columns: 1fr; }
+
+      .intro-photo { order: 2; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      .nav { min-height: 72px; }
+      .brand-wordmark { font-size: 23px; }
+      .nav-links { display: none; }
+
+      .nav > .button {
+        min-height: 41px;
+        padding: 0 12px;
+        font-size: 11px;
+      }
+
+      .hero {
+        min-height: 720px;
+        padding: 120px 0 65px;
+      }
+
+      .hero-image {
+        inset: 0;
+        width: 100%;
+        opacity: .59;
+        object-position: 56% center;
+      }
+
+      .hero::before {
+        background:
+          linear-gradient(90deg, rgba(8,8,8,.94), rgba(8,8,8,.55)),
+          linear-gradient(0deg, rgba(8,8,8,.74), transparent);
+      }
+
+      .hero-content { max-width: 100%; }
+      h1 { font-size: clamp(49px, 13vw, 72px); }
+      .hero-actions .button { width: 100%; }
+      section { padding: 70px 0; }
+      .intro-photo,
+      .intro-photo img { min-height: 0; }
+
+      .service-grid,
+      .addons-grid,
+      .clients-grid,
+      .contact-strip { grid-template-columns: 1fr; }
+
+      .service-card { min-height: 0; }
+      .addon p { min-height: 0; }
+      .live-panel { padding: 24px 19px; }
+      .gallery-grid { grid-template-columns: 1fr; grid-auto-rows: 235px; }
+      .gallery-item:nth-child(n) { grid-column: auto; }
+      .cta { padding: 68px 16px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section class="hero" id="inicio">
+      <img
+        class="hero-image"
+        src="assets/captacao-estudio.jpeg"
+        alt="Estúdio da Pub Produções preparado para gravações"
+        fetchpriority="high"
+      >
+
+      <div class="wrap">
+        <div class="hero-content">
+          <p class="hero-brand">PUB PRODUÇÕES</p>
+          <p class="eyebrow">Estúdio · Podcast · Audiovisual</p>
+
+          <h1>Seu conteúdo merece <span>qualidade profissional.</span></h1>
+
+          <p class="hero-copy">
+            Podcasts, entrevistas, lives e vídeos produzidos para contar a história da sua marca
+            com imagem e som de qualidade.
+          </p>
+
+          <div class="hero-actions">
+            <a
+              class="button"
+              href="https://wa.me/5511985426640?text=Ol%C3%A1%2C%20quero%20conversar%20sobre%20uma%20produ%C3%A7%C3%A3o."
+              target="_blank"
+              rel="noopener"
+            >Vamos conversar</a>
+
+            <a class="button outline" href="#servicos">Conheça os serviços</a>
+          </div>
+
+          <div class="hero-note">
+            <span class="live-dot"></span>
+            Gravações ao vivo ou gravadas, do estúdio para as suas plataformas.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap intro-grid">
+        <div class="intro-photo">
+          <img
+            src="assets/ponta-a-ponta.jpg"
+            alt="Vista panorâmica do estúdio da Pub Produções, com mesa, microfones e logo"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          >
+        </div>
+
+        <div class="intro-copy">
+          <p class="eyebrow">Produção de ponta a ponta</p>
+          <h2>Cada projeto pede um jeito <span class="highlight">de contar.</span></h2>
+
+          <p>
+            A Pub Produções transforma ideias em conteúdos bem produzidos: para conversar com seu público,
+            ensinar, transmitir ao vivo ou apresentar sua marca.
+          </p>
+
+          <ul class="check-list">
+            <li>Podcast e entrevistas gravados em áudio e vídeo</li>
+            <li>Gravação nos formatos vertical e horizontal</li>
+            <li>Lives para YouTube, Instagram, TikTok e outras plataformas</li>
+            <li>Cursos, videoaulas, cortes e conteúdos para redes sociais</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="servicos">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">O que fazemos</p>
+          <h2>Produção para <span class="highlight">suas ideias.</span></h2>
+          <p>Escolha o formato do seu projeto. A equipe ajuda a encontrar a produção ideal para o seu objetivo.</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card">
+            <span class="service-number">01 / CONVERSAS</span>
+            <h3>Podcasts e entrevistas</h3>
+            <p>Conversas conduzidas, entrevistas, videocasts e conteúdos de autoridade para sua marca.</p>
+            <span class="price">Projeto a partir de R$ 250 por hora</span>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">02 / AO VIVO</span>
+            <h3>Eventos e coberturas</h3>
+            <p>Registro de eventos, workshops, palestras, bastidores e momentos importantes da sua marca.</p>
+            <span class="price">Projeto a partir de R$ 250 por hora</span>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">03 / EDUCAÇÃO</span>
+            <h3>Cursos e videoaulas</h3>
+            <p>Produção de aulas, treinamentos, cursos online e conteúdos educativos.</p>
+            <span class="price">Projetos a partir de R$ 3.500</span>
+          </article>
+
+          <article class="service-card">
+            <span class="service-number">04 / SOB MEDIDA</span>
+            <h3>Produções personalizadas</h3>
+            <p>Vídeos de apresentação, chamadas, campanhas e projetos desenvolvidos conforme sua necessidade.</p>
+            <span class="price">Investimento sob consulta</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="lives">
+      <div class="wrap">
+        <div class="live-panel">
+          <div>
+            <p class="eyebrow">Transmissão ao vivo e gravação</p>
+            <h2>Ao vivo para sua audiência, <span class="highlight">em várias plataformas.</span></h2>
+
+            <p>
+              Faça lives com produção profissional ou grave seu podcast para publicar depois.
+              A transmissão pode chegar à sua audiência nas plataformas escolhidas para o projeto.
+            </p>
+
+            <div class="platforms" aria-label="Plataformas de transmissão">
+              <span class="platform">YouTube</span>
+              <span class="platform">Instagram</span>
+              <span class="platform">TikTok</span>
+              <span class="platform">Multiplataformas</span>
+            </div>
+          </div>
+
+          <div class="live-features">
+            <div class="live-feature">
+              <strong>Transmissão ao vivo</strong>
+              Produção e transmissão para conectar você ao público em tempo real.
+            </div>
+
+            <div class="live-feature">
+              <strong>Gravação para publicar depois</strong>
+              Conteúdo gravado para edição, publicação e reaproveitamento.
+            </div>
+
+            <div class="live-feature">
+              <strong>Formato vertical e horizontal</strong>
+              Captação pensada para diferentes telas e canais de publicação.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="extras">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Diferenciais Pub para o seu podcast</p>
+          <h2>Mais formatos para <span class="highlight">aproveitar cada episódio.</span></h2>
+          <p>Conteúdos adicionais para ampliar as possibilidades de publicação do seu podcast.</p>
+        </div>
+
+        <div class="addons-grid">
+          <article class="addon">
+            <h3>Gravação na vertical</h3>
+            <p>Ideal para cortes e publicações verticais, com qualidade de imagem para suas redes.</p>
+            <span class="price">A partir de R$ 70 por episódio</span>
+          </article>
+
+          <article class="addon">
+            <h3>Transmissão multiplataformas</h3>
+            <p>Seu episódio ao vivo em diferentes redes para alcançar sua audiência.</p>
+            <span class="price">A partir de R$ 70 por episódio</span>
+          </article>
+
+          <article class="addon">
+            <h3>Vídeo de bastidores</h3>
+            <p>Uma prévia especial do making of da gravação, ideal para stories e destaques.</p>
+            <span class="price">A partir de R$ 60 por episódio</span>
+          </article>
+
+          <article class="addon">
+            <h3>Cortes de episódios</h3>
+            <p>Os melhores insights da conversa com seus convidados em vídeos curtos.</p>
+            <span class="price">A partir de R$ 50 por corte</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="estudio">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Por dentro da Pub</p>
+          <h2>Um espaço pronto para <span class="highlight">seu projeto.</span></h2>
+          <p>Conheça o estúdio, os cenários e os equipamentos usados nas produções.</p>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item">
+            <img src="assets/captacao-estudio.jpeg" alt="Captação de vídeo no estúdio da Pub Produções" loading="eager">
+            <figcaption>Visão ampla do estúdio da Pub Produções</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/detalhes-estudio.jpg" alt="Detalhes do estúdio da Pub Produções" loading="eager">
+            <figcaption>Detalhes do estúdio</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/cenarios-projetos.jpg" alt="Cenários para diferentes projetos no estúdio da Pub Produções" loading="eager">
+            <figcaption>Cenários para diferentes projetos</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img src="assets/ponta-a-ponta.jpg" alt="Estúdio da Pub Produções com mesa, microfones e logo" loading="eager">
+            <figcaption>Estúdio da Pub Produções</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section" id="clientes">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Quem já produz com a Pub</p>
+          <h2>Histórias e ideias que viraram <span class="highlight">grandes projetos.</span></h2>
+          <p>Clientes de sucesso que temos orgulho de fazer parte. Veja alguns trabalhos no nosso perfil do Instagram.</p>
+        </div>
+
+        <div class="clients-grid">
+          <article class="client-card"><span>Cliente</span><h3>TecSec Podcast</h3></article>
+          <article class="client-card"><span>Cliente</span><h3>Fala Manoel Podcast</h3></article>
+          <article class="client-card"><span>Cliente</span><h3>Porta.443</h3></article>
+          <article class="client-card"><span>Cliente</span><h3>Garage Car 49</h3></article>
+          <article class="client-card"><span>Cliente</span><h3>Análise de Risco Podcast</h3></article>
+          <article class="client-card"><span>Cliente</span><h3>Algoritmo Pro</h3></article>
+          <article class="client-card"><span>Cliente</span><h3>Pod Falar Mesmo</h3></article>
+        </div>
+
+        <p class="clients-note">
+          Clientes de sucesso que temos orgulho de fazer parte. Veja os trabalhos no nosso
+          <a href="https://www.instagram.com/pubproducoes/" target="_blank" rel="noopener">perfil do Instagram</a>.
+        </p>
+      </div>
+    </section>
+
+    <section class="cta instagram-cta">
+      <div class="wrap">
+        <p class="eyebrow">Acompanhe a Pub</p>
+        <h2>Quer ver mais do nosso <span class="highlight">estúdio?</span></h2>
+        <p>Acompanhe os bastidores, cenários e gravações da Pub Produções.</p>
+
+        <div class="cta-actions">
+          <a class="button" href="https://www.instagram.com/pubproducoes/" target="_blank" rel="noopener">
+            Conheça nosso Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap">
+        <p class="eyebrow">Vamos produzir?</p>
+        <h2>Seu próximo conteúdo começa com <span class="highlight">uma boa conversa.</span></h2>
+        <p>Conte para a Pub o que você quer gravar. A equipe pode ajudar a encontrar o formato certo para o seu projeto.</p>
+
+        <div class="cta-actions">
+          <a
+            class="button"
+            href="https://wa.me/5511985426640?text=Ol%C3%A1%2C%20quero%20fazer%20um%20or%C3%A7amento%20com%20a%20Pub%20Produ%C3%A7%C3%B5es."
+            target="_blank"
+            rel="noopener"
+          >Chamar no WhatsApp</a>
+
+          <a class="button outline" href="https://www.instagram.com/pubproducoes/" target="_blank" rel="noopener">
+            Acompanhar no Instagram
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap contact-strip" aria-label="Informações de contato">
+      <div class="contact-block">
+        <h3>WhatsApp</h3>
+        <p><a href="https://wa.me/5511985426640" target="_blank" rel="noopener">+55 11 98542-6640</a></p>
+      </div>
+
+      <div class="contact-block">
+        <h3>Endereço</h3>
+        <p>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=R.+Alm.+Tamandar%C3%A9,+218+-+Centro,+Santo+Andr%C3%A9+-+SP,+09040-040"
+            target="_blank"
+            rel="noopener"
+          >R. Alm. Tamandaré, 218 — Centro, Santo André — SP, 09040-040</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© Pub Produções</span>
+      <span>Podcasts · Lives · Cursos · Produções audiovisuais</span>
+      <a href="#inicio">Voltar ao topo ↑</a>
+    </div>
+  </footer>
+</body>
+</html>
